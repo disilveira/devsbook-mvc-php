@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <title>Login - Devsbook</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
-    <link rel="icon" type="image/png" href="<?= $base; ?>/assets/favicon-16x16.png">
-    <link rel="stylesheet" href="<?= $base; ?>/assets/css/login.css" />
-</head>
+<?php $render('login-header', ['title' => 'Login']); ?>
 
 <body>
     <header>
@@ -16,7 +10,7 @@
         </div>
     </header>
     <section class="container main">
-        <form method="POST" action="<?= $base; ?>/login">
+        <form method="POST" action="<?= $base ?>/signin">
 
             <?php if (!empty($flash)) : ?>
                 <div class="flash"><?php echo $flash; ?></div>
@@ -28,7 +22,7 @@
 
             <input class="button" type="submit" value="Acessar o sistema" />
 
-            <a href="<?= $base; ?>/cadastro">Ainda não tem conta? Cadastre-se</a>
+            <a href="<?= $base ?>/signup">Ainda não tem conta? Cadastre-se</a>
         </form>
     </section>
 </body>

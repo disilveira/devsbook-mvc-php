@@ -16,7 +16,7 @@ class LoginController extends Controller
             $_SESSION['devsbook']['flash'] = '';
         }
 
-        $this->render('login', [
+        $this->render('signin', [
             'flash' => $flash
         ]);
     }
@@ -35,15 +35,20 @@ class LoginController extends Controller
                 $this->redirect('/');
             } else {
                 $_SESSION['devsbook']['flash'] = "E-mail e/ou senha não conferem.";
-                $this->redirect('/login');
+                $this->redirect('/signin');
             }
-        } else {
-            $this->redirect('/login');
         }
+
+        $this->redirect('/signin');
     }
 
     public function signup()
     {
-        echo 'Tela de cadastro';
+        $this->render('signup');
+    }
+
+    public function signupPost()
+    {
+        
     }
 }
