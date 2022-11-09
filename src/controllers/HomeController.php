@@ -21,11 +21,13 @@ class HomeController extends Controller
 
     public function index()
     {
+        $page = intval(filter_input(INPUT_GET, 'page'));
 
         $feed = PostHandler::getHomeFeed(
-            $this->loggedUser->id
+            $this->loggedUser->id,
+            $page
         );
-    
+
         $this->render('home', [
             'loggedUser' => $this->loggedUser,
             'feed' => $feed

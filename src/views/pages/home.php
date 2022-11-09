@@ -14,14 +14,18 @@
                 ]); ?>
 
 
-                <?php foreach ($feed as $feedItem) : ?>
+                <?php foreach ($feed['posts'] as $feedItem) : ?>
                     <?php $render('feed-item', [
                         'data' => $feedItem,
                         'loggedUser' => $loggedUser
                     ]); ?>
                 <?php endforeach; ?>
 
-
+                <div class="feed-pagination">
+                    <?php for ($i = 0; $i < $feed['totalPages']; $i++) : ?>
+                        <a class="<?= ($i == $feed['currentPage'] ? 'active' : ''); ?>" href="<?= $base . '?page=' . $i; ?>"><?= $i + 1; ?></a>
+                    <?php endfor; ?>
+                </div>
 
             </div>
 
