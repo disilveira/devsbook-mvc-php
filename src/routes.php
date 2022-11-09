@@ -10,6 +10,9 @@ $router->post('/signin', 'LoginController@signinPost');
 $router->get('/signup', 'LoginController@signup');
 $router->post('/signup', 'LoginController@signupPost');
 
+// Posts Routes
+$router->post('/post/new', 'PostController@new');
+
 //$router->get('/search');
 //$router->get('/perfil');
 //$router->get('/logout');
