@@ -4,9 +4,8 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handlers\UserHandler;
-use \src\handlers\PostHandler;
 
-class HomeController extends Controller
+class ProfileController extends Controller
 {
 
     private $loggedUser;
@@ -19,18 +18,26 @@ class HomeController extends Controller
         }
     }
 
-    public function index()
+    public function index($props = [])
     {
-        $page = intval(filter_input(INPUT_GET, 'page'));
 
-        $feed = PostHandler::getHomeFeed(
-            $this->loggedUser->id,
-            $page
-        );
+        $id = $this->loggedUser->id;
 
-        $this->render('home', [
+        if (!empty($props['id'])) {
+            $id = $props['id'];
+        }
+
+        $user = UserHandler::getUser($id);
+
+        if (!$user) {
+            $this->redirect('/');
+        }
+
+
+
+        $this->render('profile', [
             'loggedUser' => $this->loggedUser,
-            'feed' => $feed
+            'user' => $user
         ]);
     }
 }

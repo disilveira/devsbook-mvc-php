@@ -13,8 +13,11 @@ $router->post('/signup', 'LoginController@signupPost');
 // Posts Routes
 $router->post('/post/new', 'PostController@new');
 
+// Perfil Routes
+$router->get('/profile/{id}', 'ProfileController@index');
+$router->get('/profile', 'ProfileController@index');
+
 //$router->get('/search');
-//$router->get('/perfil');
 //$router->get('/logout');
 //$router->get('/friends');
 //$router->get('/photos');
