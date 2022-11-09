@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php $render('login-header', ['title' => 'Login']); ?>
+<?php $render('header-login', ['title' => 'Login']); ?>
 
 <body>
     <header>
