@@ -3,6 +3,8 @@
 namespace src\handlers;
 
 use \src\models\User;
+use \src\models\UserRelation;
+use \src\handlers\PostHandler;
 
 class UserHandler
 {
@@ -58,9 +60,10 @@ class UserHandler
         return $user ? true : false;
     }
 
-    public static function getUser($id)
+    public static function getUser($id, $full = false)
     {
         $data = User::select()->where('id', $id)->one();
+
 
         if ($data) {
             $user = new User();
@@ -71,6 +74,39 @@ class UserHandler
             $user->work = $data['work'];
             $user->avatar = $data['avatar'];
             $user->cover = $data['cover'];
+
+            if ($full) {
+                $user->followers = [];
+                $user->following = [];
+                $user->photos = [];
+
+                // Usuários que eu sigo
+                $followers = UserRelation::select()->where('user_to', $id)->get();
+                foreach ($followers as $follower) {
+                    $followerData = User::select()->where('id', $follower['user_from'])->one();
+                    $followerInfo = new User();
+                    $followerInfo->id = $followerData['id'];
+                    $followerInfo->name = $followerData['name'];
+                    $followerInfo->avatar = $followerData['avatar'];
+
+                    $user->followers[] = $followerInfo;
+                }
+
+                // Usuário que me segue
+                $following = UserRelation::select()->where('user_from', $id)->get();
+                foreach ($following as $follower) {
+                    $followerData = User::select()->where('id', $follower['user_to'])->one();
+                    $followerInfo = new User();
+                    $followerInfo->id = $followerData['id'];
+                    $followerInfo->name = $followerData['name'];
+                    $followerInfo->avatar = $followerData['avatar'];
+
+                    $user->following[] = $followerInfo;
+                }
+
+                // Photos
+                $user->photos = PostHandler::getPhotosFrom($id);
+            }
 
             return $user;
         }

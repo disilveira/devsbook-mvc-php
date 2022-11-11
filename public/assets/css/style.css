@@ -350,6 +350,7 @@ header .head-side {
 
 .user-photo-item {
   margin-right: 10px;
+  max-width: 25%;
 }
 .user-photo-item:last-child {
   margin-right: 0;
@@ -405,7 +406,7 @@ header .head-side {
 }
 
 .feed-pagination a:hover {
-  background-color: #DDD;
+  background-color: #ddd;
 }
 
 @media (max-width: 992px) {
