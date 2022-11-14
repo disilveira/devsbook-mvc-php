@@ -28,5 +28,12 @@ $router->get('/photos', 'ProfileController@photos');
 // Search Route
 $router->get('/search', 'SearchController@index');
 
+// Confif Routes
+$router->get('/config', 'ConfigController@index');
+$router->post('/config', 'ConfigController@save');
+
 // Logout Route
 $router->get('/logout', 'LoginController@logout');
+
+// AJAX Routes
+$router->get('/ajax/like/{id}', 'AjaxController@like');

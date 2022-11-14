@@ -70,6 +70,7 @@ class UserHandler
             $user->id = $data['id'];
             $user->name = $data['name'];
             $user->birthdate = $data['birthdate'];
+            $user->email = $data['email'];
             $user->city = $data['city'];
             $user->work = $data['work'];
             $user->avatar = $data['avatar'];
@@ -175,5 +176,23 @@ class UserHandler
         }
 
         return $users;
+    }
+
+    public static function updateUser($fields, $idUser)
+    {
+        if (count($fields) > 0) {
+
+            $update = User::update();
+
+            foreach ($fields as $fieldName => $fieldValue) {
+                if ($fieldName == 'password') {
+                    $fieldValue = password_hash($fieldValue, PASSWORD_DEFAULT);
+                }
+
+                $update->set($fieldName, $fieldValue);
+            }
+
+            $update->where('id', $idUser)->execute();
+        }
     }
 }
