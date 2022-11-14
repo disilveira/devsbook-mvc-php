@@ -90,6 +90,15 @@ class PostHandler
         ])->execute();
     }
 
+    public static function addComment($id, $text, $loggedUserId)
+    {
+        PostComment::insert([
+            'id_post' => $id,
+            'id_user' => $loggedUserId,
+            'body' => $text
+        ])->execute();
+    }
+
     public static function getUserfeed($idUser, $page, $loggedUserId)
     {
         $itemsPerPage = 5;

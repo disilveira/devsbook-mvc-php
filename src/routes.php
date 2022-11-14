@@ -37,3 +37,4 @@ $router->get('/logout', 'LoginController@logout');
 
 // AJAX Routes
 $router->get('/ajax/like/{id}', 'AjaxController@like');
+$router->post('/ajax/comment', 'AjaxController@comment');
