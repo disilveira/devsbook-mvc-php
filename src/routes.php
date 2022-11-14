@@ -1,4 +1,5 @@
 <?php
+
 use core\Router;
 
 $router = new Router();
@@ -13,12 +14,17 @@ $router->post('/signup', 'LoginController@signupPost');
 // Posts Routes
 $router->post('/post/new', 'PostController@new');
 
-// Perfil Routes
+// Profile Routes
+$router->get('/profile/{id}/friends', 'ProfileController@friends');
+$router->get('/profile/{id}/follow', 'ProfileController@follow');
 $router->get('/profile/{id}', 'ProfileController@index');
 $router->get('/profile', 'ProfileController@index');
+$router->get('/friends', 'ProfileController@friends');
+
+// Logout Route
+$router->get('/logout', 'LoginController@logout');
 
 //$router->get('/search');
-//$router->get('/logout');
 //$router->get('/friends');
 //$router->get('/photos');
 //$router->get('/config');
