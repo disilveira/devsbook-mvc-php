@@ -12,6 +12,7 @@ $router->get('/signup', 'LoginController@signup');
 $router->post('/signup', 'LoginController@signupPost');
 
 // Posts Routes
+$router->get('/post/{id}/delete', 'PostController@delete');
 $router->post('/post/new', 'PostController@new');
 
 // Profile Routes
@@ -38,3 +39,4 @@ $router->get('/logout', 'LoginController@logout');
 // AJAX Routes
 $router->get('/ajax/like/{id}', 'AjaxController@like');
 $router->post('/ajax/comment', 'AjaxController@comment');
+$router->post('/ajax/upload', 'AjaxController@upload');

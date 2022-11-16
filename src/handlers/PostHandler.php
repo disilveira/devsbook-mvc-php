@@ -176,4 +176,32 @@ class PostHandler
 
         return $photos;
     }
+
+    public static function delete($idPost, $loggedUserId)
+    {
+        //Verifica se o post existe e se é meu
+        $post = Post::select()
+            ->where('id', $idPost)
+            ->where('id_user', $loggedUserId)
+            ->get();
+
+        if (count($post) > 0) {
+            $post = $post[0];
+
+            //Deleta os likes e comentários
+            PostLike::delete()->where('id_post', $idPost)->execute();
+            PostComment::delete()->where('id_post', $idPost)->execute();
+
+            //Se o type for igual a photo, deletar o arquivo
+            if ($post['type'] === 'photo') {
+                $img = __DIR__ . '/../../public/media/uploads/' . $post['body'];
+                if (file_exists($img)) {
+                    unlink($img);
+                }
+            }
+
+            //Deletar o post
+            Post::delete()->where('id', $idPost)->execute();
+        }
+    }
 }
